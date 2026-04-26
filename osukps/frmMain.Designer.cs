@@ -63,6 +63,7 @@
 			this.fontDialog = new System.Windows.Forms.FontDialog();
 			this.tmiEditBackColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmiEditForeColor = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiEditSingleKpsColor = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnlInfo.SuspendLayout();
 			this.cms.SuspendLayout();
 			this.SuspendLayout();
@@ -125,6 +126,7 @@
             this.tmiEditKpsColors,
             this.tmiEditBackColor,
             this.tmiEditForeColor,
+            this.tmiEditSingleKpsColor,
             this.tmiEditGlobalInactiveColor,
             this.tmiEditGlobalActiveColor,
             this.toolStripSeparator2,
@@ -376,6 +378,13 @@
 			this.tmiEditForeColor.Text = "Edit foreground color";
 			this.tmiEditForeColor.Click += new System.EventHandler(this.tmiEditForeColor_Click);
 			// 
+			// tmiEditSingleKpsColor
+			// 
+			this.tmiEditSingleKpsColor.Name = "tmiEditSingleKpsColor";
+			this.tmiEditSingleKpsColor.Size = new System.Drawing.Size(164, 22);
+			this.tmiEditSingleKpsColor.Text = "Edit per-key KPS color";
+			this.tmiEditSingleKpsColor.Click += new System.EventHandler(this.tmiEditSingleKpsColor_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,5 +454,6 @@
 		private System.Windows.Forms.ToolStripMenuItem tsiReset;
 		private System.Windows.Forms.ToolStripMenuItem tmiEditBackColor;
 		private System.Windows.Forms.ToolStripMenuItem tmiEditForeColor;
+		private System.Windows.Forms.ToolStripMenuItem tmiEditSingleKpsColor;
 	}
 }

@@ -51,7 +51,7 @@ namespace osukps {
 		public void InactiveColorSetup(int c) {
 			color.inactive = Color.FromArgb(c);
 			if (lblSingleKps != null) {
-				lblSingleKps.ForeColor = color.inactive;
+				lblSingleKps.ForeColor = frmMain.SingleKpsColor;
 			}
 		}
 
@@ -76,7 +76,7 @@ namespace osukps {
 			lblSingleKps.Location = new Point(0, 36);
 			lblSingleKps.Text = "0";
 			lblSingleKps.TextAlign = ContentAlignment.MiddleCenter;
-			lblSingleKps.ForeColor = color.inactive;
+			lblSingleKps.ForeColor = frmMain.SingleKpsColor;
 			lblSingleKps.Font = new Font("Tahoma", 8, FontStyle.Bold);
 			Controls.Add(lblSingleKps);
 		}
@@ -136,11 +136,17 @@ namespace osukps {
 			label.ForeColor = frmMain.FgColor;
 		}
 
+		public void OnSingleKpsColorChange() {
+			if (lblSingleKps != null) {
+				lblSingleKps.ForeColor = frmMain.SingleKpsColor;
+			}
+		}
+
 		private void KpsTimer_Tick(object sender, EventArgs e) {
-			kpsArray[kpsIndex] = 0;
 			if (++kpsIndex >= 10) {
 				kpsIndex = 0;
 			}
+			kpsArray[kpsIndex] = 0;
 			UpdateSingleKpsLabel();
 		}
 

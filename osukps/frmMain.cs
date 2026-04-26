@@ -13,6 +13,7 @@ namespace osukps {
 	public partial class frmMain : Form {
 
 		public static Color FgColor = Color.White;
+		public static Color SingleKpsColor = Color.White;
 
 		public const byte MAX_KPS_COLORS = 30;
 		private const byte MAX_BUTTONS = 20;
@@ -279,6 +280,7 @@ namespace osukps {
 			WritePrivateProfileString("Colors", "kps", SerializeKpsColors(kpscolors, kpscolorscount), settingsFile);
 			WritePrivateProfileString("Colors", "fg", frmMain.FgColor.ToArgb().ToString(), settingsFile);
 			WritePrivateProfileString("Colors", "bg", BackColor.ToArgb().ToString(), settingsFile);
+			WritePrivateProfileString("Colors", "singlekps", frmMain.SingleKpsColor.ToArgb().ToString(), settingsFile);
 
 			for (var i = 0; i < MAX_BUTTONS; i++) {
 				var b = btns[i];
@@ -327,6 +329,10 @@ namespace osukps {
 				if (int.TryParse(temp.ToString(), out tmpi)) {
 					BackColor = Color.FromArgb(tmpi);
 					pnlInfo.BackColor = BackColor;
+				}
+				GetPrivateProfileString(section = "Colors", key = "singlekps", "-1", temp, 32, settingsFile);
+				if (int.TryParse(temp.ToString(), out tmpi)) {
+					frmMain.SingleKpsColor = Color.FromArgb(tmpi);
 				}
 
 				for (var i = 0; i < MAX_BUTTONS; i++) {
@@ -597,9 +603,21 @@ namespace osukps {
 			settingsModified = true;
 		}
 
+		private void tmiEditSingleKpsColor_Click(object sender, EventArgs e) {
+			DialogPositioner.From(this);
+			Color? newcol = frmColorPicker.ShowAndEdit(frmMain.SingleKpsColor);
+			if (newcol == null) {
+				return;
+			}
+			frmMain.SingleKpsColor = (Color) newcol;
+			OnColorsUpdated();
+			settingsModified = true;
+		}
+
 		private void OnColorsUpdated() {
 			for (int i = 0; i < MAX_BUTTONS; i++) {
 				btns[i].OnForeColorChange();
+				btns[i].OnSingleKpsColorChange();
 			}
 			lblTotal.ForeColor = frmMain.FgColor;
 			pnlInfo.BackColor = BackColor;
