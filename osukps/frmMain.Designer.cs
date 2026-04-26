@@ -137,7 +137,7 @@
             this.saveKeySettingsToolStripMenuItem,
             this.loadKeySetupToolStripMenuItem,
             this.toolStripSeparator5,
-            this.settingsToolStripMenuItem,
+            this.opacityToolStripMenuItem,
             this.changeFontToolStripMenuItem,
             this.resetFontToolStripMenuItem,
             this.toolStripSeparator4,

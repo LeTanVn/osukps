@@ -135,6 +135,33 @@ namespace osukps {
 			settingsModified = true;
 		}
 
+		private void InitializeOpacityComponent() {
+			int[] opacities = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+			foreach (int o in opacities) {
+				var b = new ToolStripMenuItem() {
+					Tag = o,
+					Text = o.ToString() + "%",
+				};
+				b.Click += Opacity_Click;
+				b.Click += n_settingChangedEvent;
+				opacityToolStripMenuItem.DropDownItems.Add(b);
+			}
+		}
+
+		private void Opacity_Click(object sender, EventArgs e) {
+			int o = (int) ((ToolStripMenuItem) sender).Tag;
+			this.Opacity = o / 100.0;
+			UpdateOpacityActiveItem();
+		}
+
+		private void UpdateOpacityActiveItem() {
+			int currentO = (int) Math.Round(this.Opacity * 100);
+			foreach (var itm in opacityToolStripMenuItem.DropDownItems) {
+				var mi = (ToolStripMenuItem) itm;
+				mi.Checked = (int) mi.Tag == currentO;
+			}
+		}
+
 		#region inidll
 		[DllImport("kernel32")]
 		private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
