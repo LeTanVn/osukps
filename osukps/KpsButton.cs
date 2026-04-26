@@ -7,6 +7,11 @@ namespace osukps {
 	public class KpsButton : Panel {
 
 		private Label label;
+		private Label lblSingleKps;
+		private byte[] kpsArray = new byte[10];
+		private byte kpsIndex;
+		private int kpsMax;
+		private Timer kpsTimer;
 		public IKeyHandler keyhandler;
 		private int colortimer;
 		private int key;
@@ -17,9 +22,15 @@ namespace osukps {
 			color = new KpsButtonColor();
 			Visible = true;
 			AutoSize = false;
-			Size = new Size(36, 36);
+			Size = new Size(36, 54);
 			Location = new Point(40 * position, 0);
 			createLabel();
+			
+			kpsTimer = new Timer();
+			kpsTimer.Interval = 100;
+			kpsTimer.Tick += KpsTimer_Tick;
+			kpsTimer.Start();
+			
 			keyhandler = NoKeyHandler.Get();
 			UpdateColor();
 		}
@@ -39,6 +50,9 @@ namespace osukps {
 
 		public void InactiveColorSetup(int c) {
 			color.inactive = Color.FromArgb(c);
+			if (lblSingleKps != null) {
+				lblSingleKps.ForeColor = color.inactive;
+			}
 		}
 
 		public void createLabel() {
@@ -54,6 +68,17 @@ namespace osukps {
 			label.ForeColor = frmMain.FgColor;
 			FontHandler.labels.Add(label);
 			Controls.Add(label);
+			
+			lblSingleKps = new Label();
+			lblSingleKps.Visible = true;
+			lblSingleKps.AutoSize = false;
+			lblSingleKps.Size = new Size(36, 18);
+			lblSingleKps.Location = new Point(0, 36);
+			lblSingleKps.Text = "0";
+			lblSingleKps.TextAlign = ContentAlignment.MiddleCenter;
+			lblSingleKps.ForeColor = color.inactive;
+			lblSingleKps.Font = new Font("Tahoma", 8, FontStyle.Bold);
+			Controls.Add(lblSingleKps);
 		}
 
 		private void KpsButton_Click(object sender, EventArgs e) {
@@ -109,6 +134,32 @@ namespace osukps {
 
 		public void OnForeColorChange() {
 			label.ForeColor = frmMain.FgColor;
+		}
+
+		private void KpsTimer_Tick(object sender, EventArgs e) {
+			kpsArray[kpsIndex] = 0;
+			if (++kpsIndex >= 10) {
+				kpsIndex = 0;
+			}
+			UpdateSingleKpsLabel();
+		}
+
+		public void AddKps() {
+			kpsArray[kpsIndex]++;
+			UpdateSingleKpsLabel();
+		}
+
+		private void UpdateSingleKpsLabel() {
+			int currentKps = 0;
+			for (int i = 0; i < 10; i++) {
+				currentKps += kpsArray[i];
+			}
+			
+			if (currentKps > kpsMax) {
+				kpsMax = currentKps;
+			}
+			
+			lblSingleKps.Text = currentKps.ToString();
 		}
 
 	}

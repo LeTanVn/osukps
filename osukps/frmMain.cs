@@ -199,6 +199,7 @@ namespace osukps {
 				if (state == 1 && ((previousbuttonstate >> i) & 1) == 0) {
 					previousbuttonstate |= 1 << i;
 					keyCount += state;
+					btns[i].AddKps();
 				} else if (state == 0) {
 					previousbuttonstate &= ~(1 << i);
 				}
@@ -220,8 +221,8 @@ namespace osukps {
 				btns[i].Visible = (i < buttonCount);
 			}
 			// because autosize derps
-			pnlKeys.Size = new Size(buttonCount * 40, 36);
-			Size = new Size(pnlKeys.Width + pnlInfo.Width, 36);
+			pnlKeys.Size = new Size(buttonCount * 40, 54);
+			Size = new Size(pnlKeys.Width + pnlInfo.Width, 54);
 		}
 
 		private void hideButtonsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -274,6 +275,7 @@ namespace osukps {
 			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
 			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), settingsFile);
+			WritePrivateProfileString("Stuff", "opacity", this.Opacity.ToString(CultureInfo.InvariantCulture), settingsFile);
 			WritePrivateProfileString("Colors", "kps", SerializeKpsColors(kpscolors, kpscolorscount), settingsFile);
 			WritePrivateProfileString("Colors", "fg", frmMain.FgColor.ToArgb().ToString(), settingsFile);
 			WritePrivateProfileString("Colors", "bg", BackColor.ToArgb().ToString(), settingsFile);

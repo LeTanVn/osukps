@@ -85,9 +85,9 @@
 			this.pnlInfo.Controls.Add(this.lblKps);
 			this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Left;
 			this.pnlInfo.Location = new System.Drawing.Point(0, 0);
-			this.pnlInfo.MinimumSize = new System.Drawing.Size(55, 36);
+			this.pnlInfo.MinimumSize = new System.Drawing.Size(55, 54);
 			this.pnlInfo.Name = "pnlInfo";
-			this.pnlInfo.Size = new System.Drawing.Size(55, 36);
+			this.pnlInfo.Size = new System.Drawing.Size(55, 54);
 			this.pnlInfo.TabIndex = 1;
 			// 
 			// lblTotal
@@ -95,7 +95,7 @@
 			this.lblTotal.AutoSize = true;
 			this.lblTotal.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblTotal.ForeColor = System.Drawing.Color.White;
-			this.lblTotal.Location = new System.Drawing.Point(0, 18);
+			this.lblTotal.Location = new System.Drawing.Point(0, 27);
 			this.lblTotal.MinimumSize = new System.Drawing.Size(0, 18);
 			this.lblTotal.Name = "lblTotal";
 			this.lblTotal.Size = new System.Drawing.Size(16, 18);
@@ -108,7 +108,7 @@
 			this.lblKps.AutoSize = true;
 			this.lblKps.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblKps.ForeColor = System.Drawing.Color.White;
-			this.lblKps.Location = new System.Drawing.Point(0, 0);
+			this.lblKps.Location = new System.Drawing.Point(0, 9);
 			this.lblKps.MinimumSize = new System.Drawing.Size(0, 18);
 			this.lblKps.Name = "lblKps";
 			this.lblKps.Size = new System.Drawing.Size(42, 18);
@@ -383,13 +383,13 @@
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.BackColor = System.Drawing.Color.Magenta;
-			this.ClientSize = new System.Drawing.Size(139, 36);
+			this.ClientSize = new System.Drawing.Size(139, 54);
 			this.ContextMenuStrip = this.cms;
 			this.Controls.Add(this.pnlInfo);
 			this.Controls.Add(this.pnlKeys);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.MaximizeBox = false;
-			this.MinimumSize = new System.Drawing.Size(0, 36);
+			this.MinimumSize = new System.Drawing.Size(0, 54);
 			this.Name = "frmMain";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
