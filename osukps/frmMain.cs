@@ -36,6 +36,7 @@ namespace osukps {
 			InitializeComponent();
 			InitializeButtonCountComponent();
 			InitializeStartStopRecHotkeyComponent();
+			InitializeOpacityComponent();
 
 			kpscolors[0].kps = 5;
 			kpscolors[0].color = Color.FromArgb(255, 0, 190, 255);
