@@ -317,12 +317,11 @@
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
 			this.toolStripSeparator5.Size = new System.Drawing.Size(161, 6);
 			// 
-			// settingsToolStripMenuItem
+			// opacityToolStripMenuItem
 			// 
-			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-			this.settingsToolStripMenuItem.Text = "Settings(Not Working)";
-			this.settingsToolStripMenuItem.Visible = false;
+			this.opacityToolStripMenuItem.Name = "opacityToolStripMenuItem";
+			this.opacityToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+			this.opacityToolStripMenuItem.Text = "Opacity";
 			// 
 			// changeFontToolStripMenuItem
 			// 
@@ -418,7 +417,7 @@
 		private System.Windows.Forms.Timer tmrProcess;
 		private System.Windows.Forms.ToolStripMenuItem saveKeySettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem opacityToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem loadKeySetupToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem tmiEditGlobalInactiveColor;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

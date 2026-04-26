@@ -15,7 +15,7 @@ namespace osukps {
 		public static Color FgColor = Color.White;
 
 		public const byte MAX_KPS_COLORS = 30;
-		private const byte MAX_BUTTONS = 10;
+		private const byte MAX_BUTTONS = 20;
 		private const byte INITIAL_BUTTONS = 4;
 		private KpsHandler kpsHandler;
 		private KpsButton[] btns;
@@ -267,7 +267,7 @@ namespace osukps {
 			string section = "";
 			string key = "";
 			try {
-				StringBuilder temp = new StringBuilder(32);
+				StringBuilder temp = new StringBuilder(1024);
 				GetPrivateProfileString(section = "Count", key = "count", "4", temp, 32, settingsFile);
 				buttonCount = (byte) Int32.Parse(temp.ToString());
 				SetButtonCount(buttonCount);
@@ -279,7 +279,12 @@ namespace osukps {
 				GetPrivateProfileString(section = "Stuff", key = "reckey", "0", temp, 32, settingsFile);
 				reckey = Int32.Parse(temp.ToString());
 				UpdateSSRHotkeyActiveItem();
-				GetPrivateProfileString(section = "Colors", key = "kps", "", temp, 128, settingsFile);
+				GetPrivateProfileString(section = "Stuff", key = "opacity", "1.0", temp, 32, settingsFile);
+				if (double.TryParse(temp.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double op)) {
+					this.Opacity = op;
+					UpdateOpacityActiveItem();
+				}
+				GetPrivateProfileString(section = "Colors", key = "kps", "", temp, 1024, settingsFile);
 				string kpscols = temp.ToString();
 				if (kpscols.Length > 0) {
 					LoadKpsColors(kpscols);
