@@ -53,7 +53,7 @@
 			this.loadKeySetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.noConfigurationsFoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.opacityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
