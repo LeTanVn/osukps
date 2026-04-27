@@ -92,43 +92,8 @@ namespace osukps {
 			}
 		}
 
-		private void InitializeStartStopRecHotkeyComponent() {
-			for (int i = 0; i < 12;) {
-				var b = new ToolStripMenuItem() {
-					Tag = 0x70 + i,
-					Text = "F" + (++i).ToString(),
-				};
-				b.Click += SSRHotkey_Click;
-				b.Click += n_settingChangedEvent;
-				startStopRecHotkeyToolStripMenuItem.DropDownItems.Add(b);
-			}
-		}
-
 		private void ButtonCount_Click(object sender, EventArgs e) {
 			SetButtonCount((byte) (int) (sender as ToolStripItem).Tag);
-		}
-
-		private void SSRHotkey_Click(object sender, EventArgs e) {
-			if (!(sender is ToolStripMenuItem)) {
-				return;
-			}
-			int nk = (int) ((ToolStripMenuItem) sender).Tag;
-			if (nk == reckey) {
-				return;
-			}
-			reckey = nk;
-			UpdateSSRHotkeyActiveItem();
-			settingsModified = true;
-		}
-
-		private void UpdateSSRHotkeyActiveItem() {
-			int idx = reckey;
-			if (idx > 0) {
-				idx -= 0x6F;
-			}
-			foreach (var itm in startStopRecHotkeyToolStripMenuItem.DropDownItems) {
-				((ToolStripMenuItem) itm).Checked = idx-- == 0;
-			}
 		}
 
 		private void n_settingChangedEvent(object sender, EventArgs e) {
@@ -294,7 +259,6 @@ namespace osukps {
 			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, settingsFile);
 			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
-			WritePrivateProfileString("Stuff", "reckey", reckey.ToString(), settingsFile);
 			WritePrivateProfileString("Stuff", "opacity", this.Opacity.ToString(CultureInfo.InvariantCulture), settingsFile);
 			WritePrivateProfileString("Colors", "kps", SerializeKpsColors(kpscolors, kpscolorscount), settingsFile);
 			WritePrivateProfileString("Colors", "fg", frmMain.FgColor.ToArgb().ToString(), settingsFile);
@@ -332,9 +296,6 @@ namespace osukps {
 					hideSingleKpsToolStripMenuItem.Checked = tmpb;
 					UpdateHideSingleKpsMenuItem(tmpb);
 				}
-				GetPrivateProfileString(section = "Stuff", key = "reckey", "0", temp, 32, settingsFile);
-				reckey = Int32.Parse(temp.ToString());
-				UpdateSSRHotkeyActiveItem();
 				GetPrivateProfileString(section = "Stuff", key = "opacity", "1.0", temp, 32, settingsFile);
 				if (double.TryParse(temp.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out double op)) {
 					this.Opacity = op;
@@ -628,6 +589,13 @@ namespace osukps {
 				btns[i].OnSingleKpsColorChange();
 			}
 			lblTotal.ForeColor = frmMain.FgColor;
+			pnlInfo.BackColor = BackColor;
+			pnlKeys.BackColor = BackColor;
+		}
+
+	}
+}
+or;
 			pnlInfo.BackColor = BackColor;
 			pnlKeys.BackColor = BackColor;
 		}
