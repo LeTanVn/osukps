@@ -34,7 +34,6 @@ namespace osukps {
 
 			InitializeComponent();
 			InitializeButtonCountComponent();
-			InitializeStartStopRecHotkeyComponent();
 			InitializeOpacityComponent();
 
 			kpscolors[0].kps = 5;
