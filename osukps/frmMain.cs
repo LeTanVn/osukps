@@ -595,10 +595,3 @@ namespace osukps {
 
 	}
 }
-or;
-			pnlInfo.BackColor = BackColor;
-			pnlKeys.BackColor = BackColor;
-		}
-
-	}
-}
