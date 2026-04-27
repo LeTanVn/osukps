@@ -22,8 +22,6 @@ namespace osukps {
 		private KpsButton[] btns;
 		private byte buttonCount;
 		private bool settingsModified;
-		private uint recordingstate;
-		private int reckey;
 		private string settingsFile = "osukps.ini";
 
 		public static KPSCOLOR[] kpscolors = new KPSCOLOR[MAX_KPS_COLORS];
@@ -208,7 +206,6 @@ namespace osukps {
 			}
 			eventmask <<= (MAX_BUTTONS - buttonCount);
 			kpsHandler.Update(keyCount);
-			UpdateRecord(eventmask);
 		}
 
 		private void SetButtonCount(byte buttonCount) {
@@ -218,12 +215,19 @@ namespace osukps {
 		}
 
 		private void SetVisibleButtonCount(byte buttonCount) {
+			bool showPerKey = !hideSingleKpsToolStripMenuItem.Checked;
 			for (int i = 0; i < MAX_BUTTONS; i++) {
 				btns[i].Visible = (i < buttonCount);
+				btns[i].SetSingleKpsVisible(showPerKey);
 			}
+			int h = showPerKey ? 54 : 36;
+			lblTotal.Location = new Point(0, showPerKey ? 27 : 18);
+			lblKps.Location = new Point(0, showPerKey ? 9 : 0);
 			// because autosize derps
-			pnlKeys.Size = new Size(buttonCount * 40, 54);
-			Size = new Size(pnlKeys.Width + pnlInfo.Width, 54);
+			pnlKeys.Size = new Size(buttonCount * 40, h);
+			pnlInfo.MinimumSize = new Size(55, h);
+			pnlInfo.Size = new Size(55, h);
+			Size = new Size(pnlKeys.Width + pnlInfo.Width, h);
 		}
 
 		private void hideButtonsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -239,6 +243,20 @@ namespace osukps {
 			}
 
 			hideButtonsToolStripMenuItem.Text = "Hide buttons";
+			SetVisibleButtonCount(this.buttonCount);
+		}
+
+		private void hideSingleKpsToolStripMenuItem_Click(object sender, EventArgs e) {
+			settingsModified = true;
+			UpdateHideSingleKpsMenuItem(hideSingleKpsToolStripMenuItem.Checked = !hideSingleKpsToolStripMenuItem.Checked);
+		}
+
+		private void UpdateHideSingleKpsMenuItem(bool dohide) {
+			if (dohide) {
+				hideSingleKpsToolStripMenuItem.Text = "Show per-key KPS";
+			} else {
+				hideSingleKpsToolStripMenuItem.Text = "Hide per-key KPS";
+			}
 			SetVisibleButtonCount(this.buttonCount);
 		}
 
@@ -272,6 +290,7 @@ namespace osukps {
 
 			WritePrivateProfileString("Count", "count", buttonCount.ToString(), settingsFile);
 			WritePrivateProfileString("Count", "hide", hideButtonsToolStripMenuItem.Checked.ToString(), settingsFile);
+			WritePrivateProfileString("Count", "hidesinglekps", hideSingleKpsToolStripMenuItem.Checked.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "family", FontHandler.currentFont.FontFamily.Name, settingsFile);
 			WritePrivateProfileString("Font", "size", FontHandler.currentFont.Size.ToString(), settingsFile);
 			WritePrivateProfileString("Font", "bold", FontHandler.currentFont.Style == FontStyle.Bold ? "y":"n", settingsFile);
@@ -307,6 +326,11 @@ namespace osukps {
 				if (bool.TryParse(temp.ToString(), out tmpb)) {
 					hideButtonsToolStripMenuItem.Checked = tmpb;
 					UpdateHideButtonsMenuItem(tmpb);
+				}
+				GetPrivateProfileString(section = "Count", key = "hidesinglekps", "False", temp, 32, settingsFile);
+				if (bool.TryParse(temp.ToString(), out tmpb)) {
+					hideSingleKpsToolStripMenuItem.Checked = tmpb;
+					UpdateHideSingleKpsMenuItem(tmpb);
 				}
 				GetPrivateProfileString(section = "Stuff", key = "reckey", "0", temp, 32, settingsFile);
 				reckey = Int32.Parse(temp.ToString());
@@ -421,22 +445,6 @@ namespace osukps {
 				Font f = new Font(fontfam, float.Parse(fontsize), bold == "y" ? FontStyle.Bold : FontStyle.Regular);
 				FontHandler.changeFont(f);
 			} catch (Exception) {}
-		}
-
-		private void cmsStartStopRecording_Click(object sender, EventArgs e) {
-			switch (recordingstate) {
-			case RS_PLAYBACK:
-			case RS_NONE: StartRecording(); break;
-			case RS_RECORDING: StopRecording(); break;
-			}
-		}
-
-		private void cmsPlaybackRecording_Click(object sender, EventArgs e) {
-			switch (recordingstate) {
-			case RS_NONE:
-			case RS_RECORDING: StartPlayback(); break;
-			case RS_PLAYBACK: StopPlayback(); break;
-			}
 		}
 
 		private void tsiAbout_Click(object sender, EventArgs e) {

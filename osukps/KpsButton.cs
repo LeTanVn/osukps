@@ -142,6 +142,13 @@ namespace osukps {
 			}
 		}
 
+		public void SetSingleKpsVisible(bool visible) {
+			if (lblSingleKps != null) {
+				lblSingleKps.Visible = visible;
+				Size = visible ? new Size(36, 54) : new Size(36, 36);
+			}
+		}
+
 		private void KpsTimer_Tick(object sender, EventArgs e) {
 			if (++kpsIndex >= 10) {
 				kpsIndex = 0;

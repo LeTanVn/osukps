@@ -31,6 +31,7 @@
 			this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.buttonCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.hideButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.hideSingleKpsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.tmiEditKpsColors = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmiEditGlobalInactiveColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,11 +42,6 @@
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.startStopRecHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.disabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsStartStopRecording = new System.Windows.Forms.ToolStripMenuItem();
-			this.cmsPlaybackRecording = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.saveKeySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.currentConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +118,7 @@
 			this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonCountToolStripMenuItem,
             this.hideButtonsToolStripMenuItem,
+            this.hideSingleKpsToolStripMenuItem,
             this.toolStripSeparator7,
             this.tmiEditKpsColors,
             this.tmiEditBackColor,
@@ -132,10 +129,6 @@
             this.toolStripSeparator2,
             this.tsiReset,
             this.toolStripSeparator1,
-            this.startStopRecHotkeyToolStripMenuItem,
-            this.cmsStartStopRecording,
-            this.cmsPlaybackRecording,
-            this.toolStripSeparator3,
             this.saveKeySettingsToolStripMenuItem,
             this.loadKeySetupToolStripMenuItem,
             this.toolStripSeparator5,
@@ -231,42 +224,12 @@
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
 			// 
-			// startStopRecHotkeyToolStripMenuItem
+			// hideSingleKpsToolStripMenuItem
 			// 
-			this.startStopRecHotkeyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.disabledToolStripMenuItem});
-			this.startStopRecHotkeyToolStripMenuItem.Name = "startStopRecHotkeyToolStripMenuItem";
-			this.startStopRecHotkeyToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-			this.startStopRecHotkeyToolStripMenuItem.Text = "Start/Stop rec hotkey";
-			// 
-			// disabledToolStripMenuItem
-			// 
-			this.disabledToolStripMenuItem.Checked = true;
-			this.disabledToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.disabledToolStripMenuItem.Name = "disabledToolStripMenuItem";
-			this.disabledToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-			this.disabledToolStripMenuItem.Tag = 0;
-			this.disabledToolStripMenuItem.Text = "disabled";
-			this.disabledToolStripMenuItem.Click += new System.EventHandler(this.SSRHotkey_Click);
-			// 
-			// cmsStartStopRecording
-			// 
-			this.cmsStartStopRecording.Name = "cmsStartStopRecording";
-			this.cmsStartStopRecording.Size = new System.Drawing.Size(164, 22);
-			this.cmsStartStopRecording.Text = "Start recording";
-			this.cmsStartStopRecording.Click += new System.EventHandler(this.cmsStartStopRecording_Click);
-			// 
-			// cmsPlaybackRecording
-			// 
-			this.cmsPlaybackRecording.Name = "cmsPlaybackRecording";
-			this.cmsPlaybackRecording.Size = new System.Drawing.Size(164, 22);
-			this.cmsPlaybackRecording.Text = "Playback recording";
-			this.cmsPlaybackRecording.Click += new System.EventHandler(this.cmsPlaybackRecording_Click);
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(161, 6);
+			this.hideSingleKpsToolStripMenuItem.Name = "hideSingleKpsToolStripMenuItem";
+			this.hideSingleKpsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+			this.hideSingleKpsToolStripMenuItem.Text = "Hide per-key KPS";
+			this.hideSingleKpsToolStripMenuItem.Click += new System.EventHandler(this.hideSingleKpsToolStripMenuItem_Click);
 			// 
 			// saveKeySettingsToolStripMenuItem
 			// 
@@ -436,11 +399,6 @@
 		private System.Windows.Forms.FontDialog fontDialog;
 		private System.Windows.Forms.ToolStripMenuItem changeFontToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resetFontToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem cmsStartStopRecording;
-		private System.Windows.Forms.ToolStripMenuItem cmsPlaybackRecording;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-		private System.Windows.Forms.ToolStripMenuItem startStopRecHotkeyToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem disabledToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripMenuItem tsiAbout;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
@@ -449,6 +407,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.ToolStripMenuItem noConfigurationsFoundToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem hideButtonsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem hideSingleKpsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
 		private System.Windows.Forms.ToolStripMenuItem tmiEditKpsColors;
 		private System.Windows.Forms.ToolStripMenuItem tsiReset;
