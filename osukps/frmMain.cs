@@ -192,6 +192,7 @@ namespace osukps {
 			pnlKeys.Size = new Size(buttonCount * 40, h);
 			pnlInfo.MinimumSize = new Size(55, h);
 			pnlInfo.Size = new Size(55, h);
+			MinimumSize = new Size(0, h);
 			Size = new Size(pnlKeys.Width + pnlInfo.Width, h);
 		}
 
