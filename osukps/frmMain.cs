@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -174,8 +174,9 @@ namespace osukps {
 
 		private void SetButtonCount(byte buttonCount) {
 			this.buttonCount = Math.Max((byte) 1, Math.Min(MAX_BUTTONS, buttonCount));
-			SetVisibleButtonCount(buttonCount);
-			hideButtonsToolStripMenuItem.Checked = false;
+			if (!hideButtonsToolStripMenuItem.Checked) {
+				SetVisibleButtonCount(buttonCount);
+			}
 		}
 
 		private void SetVisibleButtonCount(byte buttonCount) {
@@ -221,7 +222,11 @@ namespace osukps {
 			} else {
 				hideSingleKpsToolStripMenuItem.Text = "Hide per-key KPS";
 			}
-			SetVisibleButtonCount(this.buttonCount);
+			if (hideButtonsToolStripMenuItem.Checked) {
+				SetVisibleButtonCount(0);
+			} else {
+				SetVisibleButtonCount(this.buttonCount);
+			}
 		}
 
 		private void tsiExit_Click(object sender, EventArgs e) {
